@@ -1,0 +1,96 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+	<title>Previous Projects</title>
+	
+</head>
+<body>
+	<div class="projectname">
+		<h1 class="heading">Previous Projects</h1>
+	</div>
+	<nav class="navbar">
+		<div class="container">
+
+			<div class="navitems">
+				<a href="Tdashboard"><h1 class="lead2">Dashboard</h1></a>
+				<div class="menu-container">
+					<div class="menu">
+						<h1 class="lead2 menu-btn">Menu</h1>
+						<a class="menu-items" href="Tprofile"><h1 class="lead2">Profile</h1></a>
+						<a class="menu-items" href="approved_titles"><h1 class="lead2">Approved Titles</h1></a>
+						<a class="menu-items" href="submitted_projects"><h1 class="lead2">Submitted Projects</h1></a>
+						<a class="menu-items" href="previous_projects"><h1 class="lead2 active">Previous Projects</h1></a>
+						<a class="menu-items" href="teacher"><h1 class="lead2">Logout</h1></a>
+					</div>
+				</div>
+			</div>
+			
+		</div>
+	</nav>
+	<!-- Main Area Starts  !-->
+	<div class="container">
+		{% if messages %}
+	    	{% for message in messages %}
+	    	<h1 {% if message.tags %} class="{{ message.tags }}"{% endif %}>
+	    			{{ message }}
+	    	</h1>
+	   	 	{% endfor %}
+		{% endif %}
+		<div class="contents">
+			
+			<div id="uploadproject" class="upload-area padtb-20">
+				<h1 class="lead text-center strip">Upload Previous Project</h1>
+				<form class="form-control" action="upload_previous" method="post" enctype="multipart/form-data">
+					{% csrf_token %}
+					<div class="form-input-control">
+						<h1 class="label">Project Title</h1>
+						<input class="form-input br-10" type="text" name="title">
+					</div>
+					<div class="form-input-control">
+						<h1 class="label">Project File</h1>
+						<div class="form-file-control br-10">
+							<input class="form-file br-10" type="file" name="pfile">
+						</div>
+					</div>
+					<div class="form-input-control">
+						<input class="form-submit br-10" type="submit" name="submit" value="Upload">
+					</div>
+
+				</form>
+			</div>
+			<br>
+			<div class="upload-area">
+
+				<table class="table br-10 padtb-20" cellspacing="0px" cellpadding="10px">
+					<tr class="table-head">
+						<th class="text-center">Sr.</th><th>Project Title</th><th class="text-center">File</th>
+					</tr>
+					{% for i in prevprojects %}
+					<tr class="table-data">
+						<td class="text-center">{{ forloop.counter }}</td>
+						<td>{{ i.Title }}</td>
+						<td class="text-center"><a href="media/{{ i.File }}" target="_blank">Open</a></td>
+					</tr>
+					{% endfor %}
+					
+				</table>
+			</div>
+
+		</div>
+		
+	</div>
+	<!-- Main Area Ends  !-->
+	<!-- Footer Starts  !-->
+	<div class="footer">
+		<p class="footer-content">Design By : Sandeep Kumar || &copy;-- With All Rights Reserved.</p>
+	</div>
+
+	<script>
+		
+	</script>
+
+</body>
+</html>

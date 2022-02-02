@@ -1,0 +1,65 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+	<title>Previous Project</title>
+	
+</head>
+<body>
+	<div class="projectname">
+		<h1 class="heading">Previous Projects</h1>
+	</div>
+	<nav class="navbar">
+		<div class="container">
+
+			<div class="navitems">
+				<a href="Dashboard"><h1 class="lead2">Dashboard</h1></a>
+				<div class="menu-container">
+					<div class="menu">
+						<h1 class="lead2 menu-btn">Menu</h1>
+						<a class="menu-items" href="Sprofile"><h1 class="lead2">Profile</h1></a>
+						<a class="menu-items" href="upload_title"><h1 class="lead2">Upload Title</h1></a>
+						<a class="menu-items" href="upload_project"><h1 class="lead2">Upload Project</h1></a>
+						<a class="menu-items" href="prev_projects"><h1 class="lead2 active">Previous Projects</h1></a>
+						<a class="menu-items" href="student"><h1 class="lead2">Logout</h1></a>
+					</div>
+				</div>
+			</div>
+			
+		</div>
+	</nav>
+	<!-- Main Area Starts  !-->
+	<div class="container">
+		
+		<div class="content">
+
+			<div class="upload-area">
+				<table class="table br-10 padtb-20" cellspacing="0px" cellpadding="10px">
+					<tr class="table-head"><th class="text-center">Sr.</th><th>Project Title</th><th class="text-center">File</th></tr>
+					{% for i in prevprojects %}
+					<tr class="table-data">
+						<td class="text-center">{{ forloop.counter }}</td>
+						<td>{{ i.Title }}</td>
+						<td class="text-center"><a href="media/{{ i.File }}" target="_blank">Open</a></td>
+					</tr>
+					{% endfor %}
+				</table>
+			</div>
+
+		</div>
+		
+	</div>
+	<!-- Main Area Ends  !-->
+	<!-- Footer Starts  !-->
+	<div class="footer">
+		<p class="footer-content">Design By : Sandeep Kumar || &copy;-- With All Rights Reserved.</p>
+	</div>
+
+	<script>
+		
+	</script>
+
+</body>
+</html>

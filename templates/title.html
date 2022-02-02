@@ -1,0 +1,96 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+	<title>Upload Title</title>
+	
+</head>
+<body>
+	<div class="projectname">
+		{% for i in title %}
+		<h1 class="heading">{{ i.Title }}</h1>
+		{% endfor %}
+	</div>
+	<nav class="navbar">
+		<div class="container">
+
+			<div class="navitems">
+				
+				{% if uid != None %}
+				<a href="Tdashboard"><h1 class="lead2">Dashboard</h1></a>
+				{% else %}
+				<a href="Dashboard"><h1 class="lead2">Dashboard</h1></a>
+				<a href="upload_title"><h1 class="lead2">Upload More</h1></a>
+				{% endif %}
+			</div>
+			
+		</div>
+	</nav>
+	<!-- Main Area Starts  !-->
+	<div class="container">
+		
+		<div class="content">
+
+			<div class="upload-area padtb-20">
+				<h1 class="lead text-center strip">Details</h1>
+				<div style="padding: 0px 10px;">
+					{% for i in title %}
+					<div class="form-input-control">
+						<h1 class="label">Roll No.</h1>
+						<input class="form-input br-10" type="number" name="rollno" readonly value="{{ i.Rollno }}">
+					</div>
+					<div class="form-input-control">
+						<h1 class="label">Name</h1>
+						<input class="form-input br-10" type="text" name="name" readonly value="{{ i.Name }}">
+					</div>
+					<div class="form-input-control">
+						<h1 class="label">Project Title</h1>
+						<input class="form-input br-10" type="text" name="title" readonly value="{{ i.Title }}">
+					</div>
+						{% if i.Tcomment != None %}
+						<div class="form-input-control">
+							<h1 class="label">Comment</h1>
+							<input class="form-input br-10" type="text" name="title" readonly value="{{ i.Tcomment }}">
+						</div>
+						{% endif %}
+					<div class="form-input-control">
+						<h1 class="label">Project Objective</h1>
+						<textarea class="form-input br-10" rows="5" name="objective" readonly>{{ i.Objective }}</textarea>
+					</div>
+						{% if i.Ocomment != None %}
+						<div class="form-input-control">
+							<h1 class="label">Comment</h1>
+							<input class="form-input br-10" type="text" name="title" readonly value="{{ i.Ocomment }}">
+						</div>
+						{% endif %}
+					<div class="form-input-control">
+						<h1 class="label">Status</h1>
+						<input class="form-input br-10" type="text" name="date" readonly value="{{ i.Status }}">
+					</div>
+					<div class="form-input-control">
+						<h1 class="label">Uploaded-On</h1>
+						<input class="form-input br-10" type="text" name="date" readonly value="{{ i.Date }}">
+					</div>
+					{% endfor %}
+				</div>
+					
+			</div>
+			
+
+		</div>
+		
+	</div>
+	<!-- Main Area Ends  !-->
+	<!-- Footer Starts  !-->
+	<div class="footer">
+		<p class="footer-content">Design By : Sandeep Kumar || &copy;-- With All Rights Reserved.</p>
+	</div>
+
+	<script>
+		
+	</script>
+
+</body>
+</html>

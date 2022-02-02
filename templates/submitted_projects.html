@@ -1,0 +1,68 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+	<title>Submitted Projects</title>
+	
+</head>
+<body>
+	<div class="projectname">
+		<h1 class="heading">Submitted Projects</h1>
+	</div>
+	<nav class="navbar">
+		<div class="container">
+
+			<div class="navitems">
+				<a href="Tdashboard"><h1 class="lead2">Dashboard</h1></a>
+				<div class="menu-container">
+					<div class="menu">
+						<h1 class="lead2 menu-btn">Menu</h1>
+						<a class="menu-items" href="Tprofile"><h1 class="lead2">Profile</h1></a>
+						<a class="menu-items" href="approved_titles"><h1 class="lead2">Approved Titles</h1></a>
+						<a class="menu-items" href="submitted_projects"><h1 class="lead2 active">Submitted Projects</h1></a>
+						<a class="menu-items" href="previous_projects"><h1 class="lead2">Previous Projects</h1></a>
+						<a class="menu-items" href="teacher"><h1 class="lead2">Logout</h1></a>
+					</div>
+				</div>
+			</div>
+			
+		</div>
+	</nav>
+	<!-- Main Area Starts  !-->
+	<div class="container">
+
+		<div class="content">
+
+			<div class="upload-area">
+				<table class="table br-10 padtb-20" cellspacing="0px" cellpadding="10px">
+					<tr class="table-head">
+						<th class="text-center">Sr.</th><th>Roll No.</th><th>Project Title</th><th class="text-center">File</th>
+					</tr>
+					</tr>{% for i in project %}
+					<tr class="table-data">
+						<td class="text-center">{{ forloop.counter }}.</td>
+						<td class="width-fit">{{ i.Rollno }}</td>
+						<td>{{ i.Title }}</td>
+						<td class="text-center"><a href="{% url 'viewproject' i.id %}">Open</a></td>
+					</tr>
+					{% endfor %}
+				</table>
+			</div>
+
+		</div>
+		
+	</div>
+	<!-- Main Area Ends  !-->
+	<!-- Footer Starts  !-->
+	<div class="footer">
+		<p class="footer-content">Design By : Sandeep Kumar || &copy;-- With All Rights Reserved.</p>
+	</div>
+
+	<script>
+		
+	</script>
+
+</body>
+</html>

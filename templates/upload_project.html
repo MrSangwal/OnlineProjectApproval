@@ -1,0 +1,88 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+	<title>Upload Project</title>
+	
+</head>
+<body>
+	<div class="projectname">
+		<h1 class="heading">Project Upload</h1>
+	</div>
+	<nav class="navbar">
+		<div class="container">
+
+			<div class="navitems">
+				<a href="Dashboard"><h1 class="lead2">Dashboard</h1></a>
+				<div class="menu-container">
+					<div class="menu">
+						<h1 class="lead2 menu-btn">Menu</h1>
+						<a class="menu-items" href="Sprofile"><h1 class="lead2">Profile</h1></a>
+						<a class="menu-items" href="upload_title"><h1 class="lead2">Upload Title</h1></a>
+						<a class="menu-items" href="upload_project"><h1 class="lead2 active">Upload Project</h1></a>
+						<a class="menu-items" href="prev_projects"><h1 class="lead2">Previous Projects</h1></a>
+						<a class="menu-items" href="student"><h1 class="lead2">Logout</h1></a>
+					</div>
+				</div>
+			</div>
+			
+		</div>
+	</nav>
+	<!-- Main Area Starts  !-->
+	<div class="container">
+		{% if messages %}
+	    	{% for message in messages %}
+	    	<h1 {% if message.tags %} class="{{ message.tags }}"{% endif %}>
+	    			{{ message }}
+	    	</h1>
+	   	 	{% endfor %}
+		{% endif %}
+		
+		<div class="content">
+
+			<div class="upload-area padtb-20">
+				<h1 class="lead text-center strip">Project Upload Form</h1>
+				<form class="form-control" action="project_upload" method="post" enctype="multipart/form-data">
+					{% csrf_token %}
+					<div class="form-input-control">
+						<h1 class="label">Roll No.</h1>
+						<input class="form-input br-10" type="number" name="roll" readonly value="{{ sid }}">
+					</div>
+					<div class="form-input-control">
+						<h1 class="label">Project Title</h1>
+						<input class="form-input br-10" type="text" name="title">
+					</div>
+					<div class="form-input-control">
+						<h1 class="label">Project Objective</h1>
+						<textarea class="form-input br-10" rows="5" name="objective"></textarea>
+					</div>
+					<div class="form-input-control">
+						<h1 class="label">Project File</h1>
+						<div class="form-file-control br-10">
+							<input class="form-file br-10" type="file" name="pfile">
+						</div>
+					</div>
+					<div class="form-input-control">
+						<input class="form-submit br-10" type="submit" name="submit" value="Submit">
+					</div>
+
+				</form>
+			</div>
+
+		</div>
+		
+	</div>
+	<!-- Main Area Ends  !-->
+	<!-- Footer Starts  !-->
+	<div class="footer">
+		<p class="footer-content">Design By : Sandeep Kumar || &copy;-- With All Rights Reserved.</p>
+	</div>
+
+	<script>
+		
+	</script>
+
+</body>
+</html>

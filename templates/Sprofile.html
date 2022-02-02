@@ -1,0 +1,125 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+	<title>My Profile</title>
+	
+</head>
+<body>
+	<div class="projectname">
+		{% for i in info %}
+		<h1 class="heading">{{ i.UserId }} ({{ i.Rollno }})</h1>
+		{% endfor %}
+	</div>
+	<nav class="navbar">
+		<div class="container">
+
+			<div class="navitems">
+				<a href="Dashboard"><h1 class="lead2">Dashboard</h1></a>
+				<div class="menu-container">
+					<div class="menu">
+						<h1 class="lead2 menu-btn">Menu</h1>
+						<a class="menu-items" href="Sprofile"><h1 class="lead2 active">Profile</h1></a>
+						<a class="menu-items" href="upload_title"><h1 class="lead2">Upload Title</h1></a>
+						<a class="menu-items" href="upload_project"><h1 class="lead2">Upload Project</h1></a>
+						<a class="menu-items" href="prev_projects"><h1 class="lead2">Previous Projects</h1></a>
+						<a class="menu-items" href="student"><h1 class="lead2">Logout</h1></a>
+					</div>
+				</div>
+			</div>
+			
+		</div>
+	</nav>
+	<!-- Main Area Starts  !-->
+	<div class="container">
+		{% if messages %}
+	    	{% for message in messages %}
+	    	<h1 {% if message.tags %} class="{{ message.tags }}"{% endif %}>
+	    			{{ message }}
+	    	</h1>
+	   	 	{% endfor %}
+		{% endif %}
+		
+		<div class="content">
+
+			<div class="profile-box padtb-20">
+				{% for i in info %}
+				<h1 class="lead1 text-center strip mb-10">{{ i.Name }}</h1>
+				
+				<div class="profile-pic">
+					{% if i.Pic != None %}
+						<img src="media/{{ i.Pic }}">
+					{% endif %}
+				</div>
+				{% endfor %}
+				<form class="form-control" action="remove_profile" method="post">
+					{% csrf_token %}
+					<input class="profile-btn" type="submit" name="submit" value="Remove">
+				</form>
+				
+			</div>
+
+			<div class="content-area padtb-20">
+				<h1 class="lead text-center strip">Update Profile</h1>
+				<form class="form-control" action="update_student"  enctype="multipart/form-data" method="post">
+					{% csrf_token %}
+					<div class="form-input-control">
+						{% for i in info %}
+						<h1 class="label">Roll No.</h1>
+						<input class="form-input br-10" style="background: none;" type="number" name="rollno" readonly value="{{ i.Rollno }}">
+					</div>
+					<div class="form-input-control">
+						<h1 class="label">Name</h1>
+						<input class="form-input br-10" type="text" name="name" value="{{ i.Name }}">
+					</div>
+					<div class="form-input-control">
+						<h1 class="label">E-mail</h1>
+						<input class="form-input br-10" type="email" name="email" value="{{ i.Email }}">
+					</div>
+					<div class="form-input-control">
+						<h1 class="label">Phone No.</h1>
+							{% if i.Mobile != None %}
+							<input class="form-input br-10" type="number" name="phone" value="{{ i.Mobile }}">
+							{% else %}
+							<input class="form-input br-10" type="number" name="phone">
+							{% endif %}
+					</div>
+					<div class="form-input-control">
+							
+							<h1 class="label">Profile Picture</h1>
+							<input class="form-input br-10" type="file" name="pic">
+					</div>
+					<div class="form-input-control">
+						<h1 class="label">Security Question</h1>
+						<input class="form-input br-10" type="text" name="question" value="{{ i.Question }}">
+					</div>
+					<div class="form-input-control">
+						<h1 class="label">Security Answer</h1>
+						<input class="form-input br-10" type="text" name="answer" value="{{ i.Answer }}">
+						{% endfor %}
+					</div>
+					<div class="form-btn-control">
+						<a class="form-forget br-10" href="mypassword" type="button" name="changepassword">Change Password</a>
+						<input class="form-login-submit br-10" type="submit" name="submit" value="Update">
+					</div>
+
+				</form>
+			</div>
+
+		</div>
+		
+	</div>
+	<!-- Main Area Ends  !-->
+	<!-- Footer Starts  !-->
+	<div class="footer">
+		<p class="footer-content">Design By : Sandeep Kumar || &copy;-- With All Rights Reserved.</p>
+	</div>
+
+	<script>
+		
+	</script>
+
+</body>
+</html>

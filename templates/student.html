@@ -1,0 +1,127 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+	<title>Student Page</title>
+	
+</head>
+<body>
+	<div class="projectname">
+		<h1 class="heading">Online Project Approval System</h1>
+	</div>
+	<nav class="navbar">
+		<div class="container">
+
+			<div class="navitems">
+				<a href="home"><h1 class="lead2">Home</h1></a>
+				<a><h1 class="lead2">About Us</h1></a>
+				<a href="student"><h1 class="lead2 active">Student</h1></a>
+				<a href="teacher"><h1 class="lead2">Teacher</h1></a>
+			</div>
+			
+		</div>
+	</nav>
+	<!-- Main Area Starts  !-->
+	<div class="container">
+		{% if messages %}
+	    	{% for message in messages %}
+	    	<h1 {% if message.tags %} class="{{ message.tags }}"{% endif %}>
+	    			{{ message }}
+	    	</h1>
+	   	 	{% endfor %}
+		{% endif %}
+
+		<div class="content">
+
+			<div class="content-form padtb-20">
+				<h1 class="lead text-center strip">Registration Form</h1>
+				<form class="form-control" action="Sregistration" method="post" name="register">
+					{% csrf_token %}
+					<div class="form-input-control">
+						<h1 class="label">User-ID</h1>
+						<input class="form-input br-10" type="text" name="userid">
+					</div>
+					<div class="form-input-control">
+						<h1 class="label">Name</h1>
+						<input class="form-input br-10" type="text" name="name">
+					</div>
+					<div class="form-input-control">
+						<h1 class="label">Branch</h1>
+						<select class="form-input br-10" name="branch">
+							<option>SELECT</option>
+							{% for item in a %}
+							<option>{{ item.name }}</option>
+							{% endfor %}
+						</select>
+					</div>
+					<div class="form-input-control">
+						<h1 class="label">Roll Number</h1>
+						<input class="form-input br-10" type="number" name="rollno">
+					</div>
+					<div class="form-input-control">
+						<h1 class="label">E-mail</h1>
+						<input class="form-input br-10" type="email" name="email">
+					</div>
+					<div class="form-input-control">
+						<h1 class="label">Password</h1>
+						<input class="form-input br-10" type="password" name="password">
+					</div>
+					<div class="form-input-control">
+						<h1 class="label">Confirm Password</h1>
+						<input class="form-input br-10" type="password" name="confirm">
+					</div>
+					<div class="form-input-control">
+						<h1 class="label">Security Question</h1>
+						<input class="form-input br-10" type="text" name="question">
+					</div>
+					<div class="form-input-control">
+						<h1 class="label">Security Answer</h1>
+						<input class="form-input br-10" type="text" name="answer">
+					</div>
+					<div class="form-input-control">
+						<input class="form-submit br-10" type="submit" name="reg" value="Submit">
+					</div>
+
+				</form>
+			</div>
+
+			<div class="content-form padtb-20">
+				<h1 class="lead text-center strip">Login Form</h1>
+				<form class="form-control" action="Slogin" method="post" name="login">
+					{% csrf_token %}
+					<div class="form-input-control">
+						<h1 class="label">User-ID</h1>
+						<input class="form-input br-10" type="text" name="userid">
+					</div>
+					<div class="form-input-control">
+						<h1 class="label">Roll Number</h1>
+						<input class="form-input br-10" type="number" name="rollno">
+					</div>
+					<div class="form-input-control">
+						<h1 class="label">Password</h1>
+						<input class="form-input br-10" type="password" name="password">
+					</div>
+					<div class="form-btn-control">
+						<a href="{% url 'forgetpassword' 'student' %}" class="form-forget br-10" type="button" name="forget">Forget Password</a>
+						<input class="form-login-submit br-10" type="submit" name="login" value="Submit">
+					</div>
+				</form>
+			</div>
+
+		</div>
+		
+	</div>
+	<!-- Main Area Ends  !-->
+	<!-- Footer Starts  !-->
+	<div class="footer">
+		<p class="footer-content">Design By : Sandeep Kumar || &copy;-- With All Rights Reserved.</p>
+	</div>
+
+	<script>
+
+	</script>
+
+</body>
+</html>

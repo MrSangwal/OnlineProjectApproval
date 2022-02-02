@@ -1,0 +1,218 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+	<title>Dashboard</title>
+	
+	
+</head>
+<body>
+	<div class="projectname">
+		<h1 class="heading">Welcome {{ sid }}</h1>
+	</div>
+	<nav class="navbar">
+		<div class="container">
+
+			<div class="navitems">
+				<a href="Dashboard"><h1 class="lead2 active">Dashboard</h1></a>
+				<div class="menu-container">
+					<div class="menu">
+						<h1 class="lead2 menu-btn">Menu</h1>
+						<a class="menu-items" href="Sprofile"><h1 class="lead2">Profile</h1></a>
+						<a class="menu-items" href="upload_title"><h1 class="lead2">Upload Title</h1></a>
+						<a class="menu-items" href="upload_project"><h1 class="lead2">Upload Project</h1></a>
+						<a class="menu-items" href="prev_projects"><h1 class="lead2">Previous Projects</h1></a>
+						<a class="menu-items" href="student"><h1 class="lead2">Logout</h1></a>
+					</div>
+				</div>
+			</div>
+			
+		</div>
+	</nav>
+	<!-- Main Area Starts  !-->
+	<div class="container">
+		{% if messages %}
+	    	{% for message in messages %}
+	    	<h1 {% if message.tags %} class="{{ message.tags }}"{% endif %}>
+	    			{{ message }}
+	    	</h1>
+	   	 	{% endfor %}
+		{% endif %}
+		<div class="content">
+
+			<div class="content-form padtb-20">
+				<h1 class="lead text-center strip">Approved</h1>
+				<br>
+				<div class="status-chat">
+					<h1 id="title-link" class="lead3 link text-center strip width-50" onclick="titles()">Titles</h1>
+					<h1 id="project-link" class="lead3 link text-center strip width-50" onclick="project()">Projects</h1>
+				</div>
+				<div id="title" class="status-chat-content">
+					<table class="width-100" cellspacing="0px" cellpadding="10px">
+						<tr class="table-head">
+							<th class="text-center">Sr.</th>
+							<th>Title</th>
+							<th class="text-center">View</th>
+						</tr>
+						{% for i in titleup %}
+						<tr class="table-data">
+							<td class="text-center">{{ forloop.counter }}.</td>
+							<td>{{ i.Title }}</td>
+							<td class="text-center"><a href="{% url 'view' i.id %}">Open</a></td>
+						</tr>
+
+						{% endfor %}
+					</table>
+				</div>
+				<div id="project" class="status-chat-content">
+					<table class="width-100" cellspacing="0px" cellpadding="10px">
+						<tr class="table-head">
+							<th class="text-center">Sr.</th>
+							<th>Project</th>
+							<th class="text-center">View</th>
+						</tr>
+						{% for i in projectup %}
+						<tr class="table-data">
+							<td class="text-center">{{ forloop.counter }}.</td>
+							<td>{{ i.Title }}</td>
+							<td class="text-center"><a href="{% url 'viewproject' i.id %}">Open</a></td>
+						</tr>
+
+						{% endfor %}
+					</table>
+				</div>
+			</div>
+
+			<div class="content-form padtb-20">
+				<div class="status-chat">
+					<h1 id="chat-link" class="lead1 link text-center strip width-50" onclick="chat()">Chat</h1>
+					<h1 id="status-link" class="lead1 link text-center strip width-50" onclick="status()">Uploads</h1>
+					
+				</div>
+				<div id="status" class="status-chat-content">
+					<div class="status-chat">
+					<h1 id="stitle-link" class="lead3 link text-center strip width-50" onclick="stitles()">Titles</h1>
+					<h1 id="sproject-link" class="lead3 link text-center strip width-50" onclick="sproject()">Projects</h1>
+				</div>
+				<div id="stitle" class="status-chat-content">
+					<table class="width-100" cellspacing="0px" cellpadding="10px">
+						<tr class="table-head">
+							<th class="text-center">Sr.</th>
+							<th>Title</th>
+							<th class="text-center">Status</th>
+						</tr>
+						{% for i in title %}
+						<tr class="table-data">
+							<td class="text-center">{{ forloop.counter }}.</td>
+							<td><a href="{% url 'view' i.id %}">{{ i.Title }}</a></td>
+							<td class="text-center">{{ i.Status }}</td>
+						</tr>
+
+						{% endfor %}
+					</table>
+				</div>
+				<div id="sproject" class="status-chat-content">
+					<table class="width-100" cellspacing="0px" cellpadding="10px">
+						<tr class="table-head">
+							<th class="text-center">Sr.</th>
+							<th>Project</th>
+							<th class="text-center">Status</th>
+						</tr>
+						{% for i in project %}
+						<tr class="table-data">
+							<td class="text-center">{{ forloop.counter }}.</td>
+							<td><a href="{% url 'viewproject' i.id %}">{{ i.Title }}</a></td>
+							<td class="text-center">{{ i.Status }}</td>
+						</tr>
+
+						{% endfor %}
+					</table>
+				</div>
+				</div>
+				<div id="chat" class="status-chat-content">
+					<div id="chatbox" style="color: black;padding: 5px 10px;height: 250px;overflow: auto;">
+						<!-- -----------------------------Chat---------------------- -->
+					</div>
+					<form class="form-chat" action="chatme" method="post">
+						{% csrf_token%}
+						<div class="form-chat-control">
+							<input class="chat-input br-10" type="text" name="message" required="">
+							<input class="chat-btn" type="submit" name="send" value="Send">
+						</div>
+						
+					</form>
+				</div>
+			</div>
+
+		</div>
+		
+	</div>
+	<!-- Main Area Ends  !-->
+	<!-- Footer Starts  !-->
+	<div class="footer">
+		<p class="footer-content">Design By : Sandeep Kumar || &copy;-- With All Rights Reserved.</p>
+	</div>
+
+	<script src="{% static 'js/jquery-3.6.0.min.js' %}"></script>
+	<script>
+
+		titles();
+		function titles()
+		{
+			document.getElementById("title").style.display="block";
+			document.getElementById("title-link").style.opacity="1";
+			document.getElementById("project").style.display="none";
+			document.getElementById("project-link").style.opacity=".3";
+		}
+		function project()
+		{
+			document.getElementById("project").style.display="block";
+			document.getElementById("project-link").style.opacity="1";
+			document.getElementById("title").style.display="none";
+			document.getElementById("title-link").style.opacity=".3";
+		}
+		chat();
+		function status()
+		{
+			document.getElementById("status").style.display="block";
+			document.getElementById("status-link").style.opacity="1";
+			document.getElementById("chat").style.display="none";
+			document.getElementById("chat-link").style.opacity=".3";
+		}
+		function chat()
+		{
+			document.getElementById("chat").style.display="block";
+			document.getElementById("chat-link").style.opacity="1";
+			document.getElementById("status").style.display="none";
+			document.getElementById("status-link").style.opacity=".3";
+		}
+		stitles();
+		function stitles()
+		{
+			document.getElementById("stitle").style.display="block";
+			document.getElementById("stitle-link").style.opacity="1";
+			document.getElementById("sproject").style.display="none";
+			document.getElementById("sproject-link").style.opacity=".3";
+		}
+		function sproject()
+		{
+			document.getElementById("sproject").style.display="block";
+			document.getElementById("sproject-link").style.opacity="1";
+			document.getElementById("stitle").style.display="none";
+			document.getElementById("stitle-link").style.opacity=".3";
+		}
+		$(document).ready( function() {
+			$("#chatbox").load("{{ chat }}");
+			function scroll_chat(){
+				$("#chatbox").load("{{ chat }}");
+				var newscrollHeight = $("#chatbox")[0].scrollHeight;
+				$("#chatbox").animate({ scrollTop: newscrollHeight }, 'normal');
+			}
+			setInterval(scroll_chat,1500)
+		});
+	</script>
+
+</body>
+</html>
